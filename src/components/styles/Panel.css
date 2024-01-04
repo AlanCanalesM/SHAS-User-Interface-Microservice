@@ -1,0 +1,10 @@
+.Panel{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: auto;
+    padding: 20px;
+    background-color: #2a5600c9;
+    width: 70%;
+    
+}

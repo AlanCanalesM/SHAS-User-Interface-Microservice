@@ -1,7 +1,7 @@
 // LightsControl.js
 
 import React, { useState } from 'react';
-import './LightsControl.css'; // Import your CSS file for styling
+import './styles/LightsControl.css'; // Import your CSS file for styling
 
 const LightsControl = () => {
   const [lightsOn, setLightsOn] = useState(false);

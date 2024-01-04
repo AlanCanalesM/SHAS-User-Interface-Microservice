@@ -1,0 +1,12 @@
+.Options{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right: auto;
+    padding: 20px;
+    border-radius: 0px;
+    background-color: #030056;
+    box-shadow: 0 0 5px 3px rgba(0,0,0,0.1);
+    width: 25%;
+    
+}

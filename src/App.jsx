@@ -1,26 +1,30 @@
 // App.js
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import Home from './components/Home';
-import LightsControl from './components/LightsControl';
-// import ThermostatControl from './components/ThermostatControl';
-// import SecurityDashboard from './components/SecurityDashboard';
+import Options from './components/Menu';
+import Panel from './components/Panel';
+import './App.css';
+
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/lights" element={<LightsControl/>}/>
-          {/* <Route path="/thermostat" component={ThermostatControl} />
-          <Route path="/security" component={SecurityDashboard} /> */}
-        </Routes>
-      </div>
-    </Router>
+  <div className='Main'>
+  <Header />
+  <Options />
+  <Panel />
+  </div>
+    // // <Router>
+      
+    //     
+    //     {/* <Routes>
+    //       <Route path="/" element={<Home/>}/>
+    //       <Route path="/lights" element={<LightsControl/>}/>
+    //       {/* <Route path="/thermostat" component={ThermostatControl} />
+    //       <Route path="/security" component={SecurityDashboard} /> */}
+    //     {/* </Routes> */} 
+      
+    // // </Router>
   );
 }
 
