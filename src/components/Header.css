@@ -1,0 +1,24 @@
+
+
+.Header {
+  background-color: #030056;
+  color: #ecf0f1;
+  display: grid;
+  grid-template-areas: "logo nav";
+}
+
+.Navbar {
+  grid-area: nav;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  align-items: center;
+  justify-items: center;
+
+}
+
+.Title{
+    color:#00f9ff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 1rem;
+}
