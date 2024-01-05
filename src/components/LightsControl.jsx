@@ -2,21 +2,107 @@
 
 import React, { useState } from 'react';
 import './styles/LightsControl.css'; // Import your CSS file for styling
+import ColorPalette from './ColorPalette'
 
 const LightsControl = () => {
   const [lightsOn, setLightsOn] = useState(false);
+  const [selectedLight, setSelectedLight] = useState(null);
+  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [brightness, setBrightness] = useState(100);
+  const [lights, setLights] = useState([
+    { id: 1, name: 'Light 1', color: '#ffffff', roomId: 1 },
+    { id: 2, name: 'Light 2', color: '#ff0000', roomId: 2 },
+    // Add more lights as needed
+  ]);
+  const [rooms, setRooms] = useState([
+    { id: 1, name: 'Living Room' },
+    { id: 2, name: 'Bedroom' },
+    // Add more rooms as needed
+  ]);
 
   const toggleLights = () => {
     setLightsOn(!lightsOn);
     // Add logic to send event to microservices or backend
   };
 
-  return (
-    <div className="lights-control">
+  const handleLightChange = (lightId) => {
+    const selected = lights.find(light => light.id === lightId);
+    setSelectedLight(selected);
+    setBrightness(selected?.brightness || 100);
+  };
+
+  const handleColorChange = (color) => {
+    // Update the color of the selected light
+    const updatedLights = lights.map(light =>
+      light.id === selectedLight.id ? { ...light, color } : light
+    );
+    setLights(updatedLights);
+    setSelectedLight({ ...selectedLight, color });
+  };
+
+  const handleBrightnessChange = (value) => {
+    // Update the brightness of the selected light
+    setBrightness(value);
+    setLights(prevLights =>
+      prevLights.map(light =>
+        light.id === selectedLight.id ? { ...light, brightness: value } : light
+      )
+    );
+    setSelectedLight(prevLight => ({ ...prevLight, brightness: value }));
+  };
+
+  const handleRoomChange = (roomId) => {
+    setSelectedRoom(roomId);
+    setSelectedLight(null); // Reset selected light when changing rooms
+  };
+
+ return (
+    <div className="lights-control" style={{ backgroundColor: selectedLight?.color }}>
       <h2 className="control-title">Lights Control</h2>
-      <button className={`toggle-button ${lightsOn ? 'on' : 'off'}`} onClick={toggleLights}>
-        {lightsOn ? 'Turn Off Lights' : 'Turn On Lights'}
-      </button>
+      <select onChange={(e) => handleRoomChange(Number(e.target.value))}>
+        <option value={null}>Select Room</option>
+        {rooms.map(room => (
+          <option key={room.id} value={room.id}>{room.name}</option>
+        ))}
+      </select>
+      {selectedRoom && (
+        <>
+          <select onChange={(e) => handleLightChange(Number(e.target.value))}>
+            <option value={null}>Select Light</option>
+            {lights
+              .filter(light => light.roomId === selectedRoom)
+              .map(light => (
+                <option key={light.id} value={light.id}>{light.name}</option>
+              ))}
+          </select>
+          {selectedLight && (
+            <>
+              <div className="selected-light-info">
+                <p>Name: {selectedLight.name}</p>
+                <p>Color: {selectedLight.color}</p>
+                <p>Brightness: {brightness}</p>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value={brightness}
+                onChange={(e) => handleBrightnessChange(Number(e.target.value))}
+              />
+              <button className={`toggle-button ${lightsOn ? 'on' : 'off'}`} onClick={toggleLights}>
+                {lightsOn ? 'Turn Off Lights' : 'Turn On Lights'}
+              </button>
+              <div className="selected-light-info">
+                <p>Name: {selectedLight.name}</p>
+                <p>Color: {selectedLight.color}</p>
+                <p>Brightness: {brightness}</p>
+                <ColorPalette selectedColor={selectedLight.color} onColorChange={handleColorChange} />
+              </div>
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 }

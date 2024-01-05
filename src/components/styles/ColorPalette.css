@@ -1,0 +1,15 @@
+.color-palette {
+    display: flex;
+    margin-top: 10px;
+  }
+  
+  .color-option {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .color-option.selected {
+    border: 2px solid #000;
+  }

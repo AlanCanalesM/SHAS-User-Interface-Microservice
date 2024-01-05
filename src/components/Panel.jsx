@@ -1,10 +1,10 @@
 import './styles/Panel.css'
+import LightsControl from './LightsControl'
 
 function Panel(){
     return(
         <div className='Panel'>
-            <h1>Panel</h1>
-            <p>Welcome to the panel page!</p>
+            <LightsControl/>
         </div>
     )
 }
