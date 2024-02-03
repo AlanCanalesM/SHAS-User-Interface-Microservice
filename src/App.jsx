@@ -3,7 +3,7 @@
 import React from 'react';
 import Header from './components/Header';
 import Options from './components/Menu';
-import Panel from './components/Panel';
+import PanelGrid from './components/PanelGrid';
 import './App.css';
 
 
@@ -11,8 +11,7 @@ function App() {
   return (
   <div className='Main'>
   <Header />
-  <Options />
-  <Panel />
+  <PanelGrid />
   </div>
     // // <Router>
       

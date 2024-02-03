@@ -57,7 +57,7 @@ const LightsControl = () => {
   };
 
  return (
-    <div className="lights-control" style={{ backgroundColor: selectedLight?.color }}>
+    <div className="lights-control" >
       <h2 className="control-title">Lights Control</h2>
       <select onChange={(e) => handleRoomChange(Number(e.target.value))}>
         <option value={null}>Select Room</option>
@@ -77,11 +77,6 @@ const LightsControl = () => {
           </select>
           {selectedLight && (
             <>
-              <div className="selected-light-info">
-                <p>Name: {selectedLight.name}</p>
-                <p>Color: {selectedLight.color}</p>
-                <p>Brightness: {brightness}</p>
-              </div>
               <input
                 type="range"
                 min="0"
@@ -94,8 +89,6 @@ const LightsControl = () => {
                 {lightsOn ? 'Turn Off Lights' : 'Turn On Lights'}
               </button>
               <div className="selected-light-info">
-                <p>Name: {selectedLight.name}</p>
-                <p>Color: {selectedLight.color}</p>
                 <p>Brightness: {brightness}</p>
                 <ColorPalette selectedColor={selectedLight.color} onColorChange={handleColorChange} />
               </div>
