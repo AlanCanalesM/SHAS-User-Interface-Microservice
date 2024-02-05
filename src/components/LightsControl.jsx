@@ -4,21 +4,17 @@ import React, { useState } from 'react';
 import './styles/LightsControl.css'; // Import your CSS file for styling
 import ColorPalette from './ColorPalette'
 
-const LightsControl = () => {
+const LightsControl = ({ lights }) => {
   const [lightsOn, setLightsOn] = useState(false);
   const [selectedLight, setSelectedLight] = useState(null);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [brightness, setBrightness] = useState(100);
-  const [lights, setLights] = useState([
-    { id: 1, name: 'Light 1', color: '#ffffff', roomId: 1 },
-    { id: 2, name: 'Light 2', color: '#ff0000', roomId: 2 },
-    // Add more lights as needed
-  ]);
-  const [rooms, setRooms] = useState([
-    { id: 1, name: 'Living Room' },
-    { id: 2, name: 'Bedroom' },
-    // Add more rooms as needed
-  ]);
+  
+  const rooms = Array.from(new Set(lights.map(light => light.roomId))).map(roomId => ({
+    id: roomId,
+    name: roomId
+  }));
+  console.log(rooms);
 
   const toggleLights = () => {
     setLightsOn(!lightsOn);
@@ -52,14 +48,15 @@ const LightsControl = () => {
   };
 
   const handleRoomChange = (roomId) => {
+    console.log(roomId);
     setSelectedRoom(roomId);
     setSelectedLight(null); // Reset selected light when changing rooms
   };
 
- return (
+  return (
     <div className="lights-control" >
-      <h2 className="control-title">Lights Control</h2>
-      <select onChange={(e) => handleRoomChange(Number(e.target.value))}>
+      <h2 className="title">Lights Control</h2>
+      <select onChange={(e) => handleRoomChange(e.target.value)}>
         <option value={null}>Select Room</option>
         {rooms.map(room => (
           <option key={room.id} value={room.id}>{room.name}</option>

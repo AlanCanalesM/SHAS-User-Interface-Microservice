@@ -1,25 +1,47 @@
-.ligths-list{
+.lights-list {
   color: #00f9ff;
   padding: 2rem;
   background-color: #03005e;
   border-radius: 8px;
   margin: 1rem;
   font-family: Arial, Helvetica, sans-serif;
-
 }
 
-.room{
-    border: 1px solid #00f9ff;
-    padding: 1rem;
-    border-radius: 15px;
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  
+  /* center the text */
+  text-align: center;
+}
+.room {
+  display: flex;
+  align-items: center;
+  border: 1px solid #00f9ff;
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.room-content {
+  flex: 1;
 }
 
 .color-circle {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 8px;
-    
-  }
-  
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+button {
+  background-color: #03005e;
+  border: none;
+  color: #00f9ff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #001f3f;
+}

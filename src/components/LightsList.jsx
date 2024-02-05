@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import './styles/LightsList.css';
 
-function LightsList() {
-  const [lights, setLights] = useState([
-    { id: 1, name: 'Light 1', color: '#1385C7', roomId: 1, brightness: 100 },
-    { id: 2, name: 'Light 2', color: '#ff0000', roomId: 2, brightness: 100 },
-    // Add more lights as needed
-  ]);
+function LightsList({ lights }) {
+  const [currentRoom, setCurrentRoom] = useState(0);
 
   // Group lights by roomId
   const lightsByRoom = lights.reduce((acc, light) => {
@@ -16,23 +12,34 @@ function LightsList() {
     return acc;
   }, {});
 
+  const roomIds = Object.keys(lightsByRoom);
+
+  const handleRoomChange = (delta) => {
+    const newIndex = (currentRoom + delta + roomIds.length) % roomIds.length;
+    setCurrentRoom(newIndex);
+  };
+
   return (
-    <div className='ligths-list'>
-      {Object.keys(lightsByRoom).map((roomId) => (
-        <div key={roomId} className='room'>
-          <h3>Room {roomId}</h3>
-          <ul>
-            {lightsByRoom[roomId].map((light) => (
-              <li key={light.id}>
-                {light.name} - {light.brightness}% <span
-                  className='color-circle'
-                  style={{ backgroundColor: light.color }}
-                ></span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className='lights-list'>
+      <h2 className='title'>Lights Per Room</h2>
+      <div className='room'>
+        <button onClick={() => handleRoomChange(-1)}>&lt;</button>
+        {currentRoom !== null && (
+          <div className='room-content'>
+            <h3>{roomIds[currentRoom]}</h3>
+            <ul>
+              {lightsByRoom[roomIds[currentRoom]].map((light) => (
+                <li key={light.id}>
+                  {light.name} - {light.brightness}%{' '}
+                  <span className='color-circle' style={{ backgroundColor: light.color }}></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <button onClick={() => handleRoomChange(1)}>&gt;</button>
+      </div>
+
     </div>
   );
 }

@@ -9,10 +9,14 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.control-title {
-  color: #00f9ff;
-}
 
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #00f9ff;
+  /* center the text */
+  text-align: center;
+}
 .toggle-button {
   background-color: #00f9ff;
   color: #03005e;
@@ -23,6 +27,15 @@
   border-radius: 4px;
 }
 
+.toggle-button:hover {
+  background-color: #00f9ff;
+  color: #03005e;
+  border: 1px solid #03005e;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
 .toggle-button.on {
   background-color: #03005e;
   color: #00f9ff;
